@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 '''
 Description:
-MD-GRU pipeline for brainstem segmentation, taking additionally care of:
+nnU-Net pipeline for brainstem segmentation, taking additionally care of:
     1. axes orientation - has to be RAS+ or LAS+, otherwise will be reoriented to RAS+
     2. image resolution - will be reported, but not adjusted, since nnU-Net is doing this
 '''
@@ -69,7 +69,7 @@ def nnunet_prediction(t1, verbose=True):
         print("STDOUT/STDERR:")
         print(output.stdout.decode("utf-8"))
         raise ValueError(
-            "ERROR during call of MD-GRU command! For stdout/stderr of the command see above!"
+            "ERROR during call of nnU-Net command! For stdout/stderr of the command see above!"
         )
     else:
         if verbose: print(output.stdout.decode("utf-8"))
@@ -128,7 +128,7 @@ def pipeline_nnunet(t1, brainstem_mask, verbose=True):
     if verbose: print(f'Resolution is {zooms}')
     
     # Predict WM lesions using nnU-Net
-    if verbose: print('\nPredicting WM lesions using MD-GRU:')
+    if verbose: print('\nPredicting WM lesions using nnU-Net:')
     start = time.time()
     labelmap = nnunet_prediction(t1, verbose)
     end = time.time()

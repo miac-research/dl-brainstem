@@ -4,7 +4,8 @@
 Description:
 MD-GRU pipeline for brainstem segmentation, taking additionally care of:
     1. axes orientation - has to be RAS+ or LAS+, otherwise will be reoriented to RAS+
-    2. image resolution - has to be within range [0.95,1.05] in each dimension
+    2. image resolution - has to be within range [0.8 mm, 1.2 mm] in each dimension, 
+        otherwise will be resliced to 1 mm isotropic
 '''
 
 import sys, os, time, subprocess, argparse, re
