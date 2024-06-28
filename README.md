@@ -36,7 +36,7 @@ apptainer build brainstem-nnunet.sif docker://ghcr.io/miac-research/brainstem-nn
 apptainer run -B $(pwd) --nv brainstem-nnunet.sif T1.nii.gz
 ```
 
-### MD_GRU algorithm using Docker
+### MD-GRU algorithm using Docker
 
 ```
 # 1. Pull the image into your local registry
@@ -46,7 +46,7 @@ docker pull ghcr.io/miac-research/brainstem-mdgru:latest
 docker run --rm --gpus all -v $(pwd):/data  brainstem-mdgru:latest /data/T1.nii.gz
 ```
 
-### nnU-net algorithm using Apptainer
+### MD-GRU algorithm using Apptainer
 
 ```
 # 1. Download the image and save as sif file   
