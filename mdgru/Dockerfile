@@ -33,5 +33,5 @@ RUN wget -O brainstem_140000.data-00000-of-00001 https://zenodo.org/records/1257
 WORKDIR /opt/scripts/
 RUN wget -O pipeline_mdgru.py https://raw.githubusercontent.com/miac-research/dl-brainstem/main/mdgru/pipeline_mdgru.py
 
-# Command to be run at Docker start
+# Entrypoint
 ENTRYPOINT [ "python", "/opt/scripts/pipeline_mdgru.py" ]
