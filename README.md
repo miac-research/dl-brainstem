@@ -6,31 +6,31 @@ The methods are described in detail in the corresponding publication:
 *TO BE ADDED*  
 Please make sure to cite this publication when using the method.
 
-> This method is not a medical device and for research use only!
-Do NOT use this  method for diagnosis, prognosis, monitoring or any other
-purposes in clinical use.
+> **PLEASE NOTE: This method is NOT a medical device and for research use only!
+Do NOT use this method for diagnosis, prognosis, monitoring or any other
+purposes in clinical use.**
 
 ## Using the pre-built container images
 
 Ready-to-use, pre-built images for MD-GRU and nnU-Net are available for download from the [Github container registry](https://github.com/miac-research/dl-brainstem/packages). These images have been tested with Docker and Apptainer/Singularity.
 
-> **IMPORTANT**: When pulling an image from the registry, **make sure to substitute {version}** with the version in the following examples with the version number you would like to use, e.g. `1.0.0`.
+> **IMPORTANT**: When pulling an image from the registry, instead of the latest version, you can also pull a specific version by substituting `latest` with the version number, e.g. `1.0.0`.
 
 ### nnU-net algorithm using Docker
 
 ```
 # 1. Pull the image into your local registry
-docker pull ghcr.io/miac-research/brainstem-nnunet:{version}
+docker pull ghcr.io/miac-research/brainstem-nnunet:latest
 
 # 2. Run inference on a T1w image using GPU (flag --gpus all)
-docker run --rm --gpus all -v $(pwd):/data  brainstem-nnunet:{version} /data/T1.nii.gz
+docker run --rm --gpus all -v $(pwd):/data  brainstem-nnunet:latest /data/T1.nii.gz
 ```
 
 ### nnU-net algorithm using Apptainer
 
 ```
 # 1. Download the image and save as sif file   
-apptainer build brainstem-nnunet.sif docker://ghcr.io/miac-research/brainstem-nnunet:{version}
+apptainer build brainstem-nnunet.sif docker://ghcr.io/miac-research/brainstem-nnunet:latest
 
 # 2. Run inference on a T1w image using GPU (flag --nv)
 apptainer run -B $(pwd) --nv brainstem-nnunet.sif T1.nii.gz
@@ -40,17 +40,17 @@ apptainer run -B $(pwd) --nv brainstem-nnunet.sif T1.nii.gz
 
 ```
 # 1. Pull the image into your local registry
-docker pull ghcr.io/miac-research/brainstem-mdgru:{version}
+docker pull ghcr.io/miac-research/brainstem-mdgru:latest
 
 # 2. Run inference on a T1w image using GPU (flag --gpus all)
-docker run --rm --gpus all -v $(pwd):/data  brainstem-mdgru:{version} /data/T1.nii.gz
+docker run --rm --gpus all -v $(pwd):/data  brainstem-mdgru:latest /data/T1.nii.gz
 ```
 
 ### nnU-net algorithm using Apptainer
 
 ```
 # 1. Download the image and save as sif file   
-apptainer build brainstem-mdgru.sif docker://ghcr.io/miac-research/brainstem-mdgru:{version}
+apptainer build brainstem-mdgru.sif docker://ghcr.io/miac-research/brainstem-mdgru:latest
 
 # 2. Run inference on a T1w image using GPU (flag --nv)
 apptainer run -B $(pwd) --nv brainstem-mdgru.sif T1.nii.gz
