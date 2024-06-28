@@ -1,0 +1,37 @@
+FROM nvcr.io/nvidia/tensorflow:23.03-tf1-py3
+
+LABEL VERSION="1.0.0"
+
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Install dependencies
+RUN pip3 install --no-cache-dir \
+	nibabel==3.2.1 \
+	pydicom==2.2.2 \
+	pynrrd==0.4.2 \
+	scikit-image==0.19.1 \
+	setproctitle==1.2.2 \
+	visdom==0.1.8.9 \
+ && pip3 install --no-deps git+https://github.com/spezold/mvloader.git
+ && pip3 install --no-cache-dir --no-deps --force-reinstall -v \
+	future==0.18.2 \
+	SimpleITK==2.0.1
+
+# Clone MD-GRU
+WORKDIR /opt
+RUN git clone https://github.com/miac-research/mdgru.git
+WORKDIR /opt/mdgru
+RUN git reset --hard 791ee4f
+
+# Copy the MD-GRU model
+WORKDIR /model
+wget -O brainstem_140000.data-00000-of-00001 https://zenodo.org/records/12578294/files/brainstem_140000.data-00000-of-00001?download=1
+wget -O brainstem_140000.index https://zenodo.org/records/12578294/files/brainstem_140000.index?download=1 
+wget -O brainstem_140000.meta https://zenodo.org/records/12578294/files/brainstem_140000.meta?download=1
+
+# Copy the python pipeline scripts
+WORKDIR /opt/scripts/
+wget -O pipeline_mdgru.py GITHUBURLGOESHERE
+
+# Command to be run at Docker start
+ENTRYPOINT [ "python", "/opt/scripts/pipeline_mdgru.py" ]
