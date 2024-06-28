@@ -12,7 +12,7 @@ RUN pip3 install --no-cache-dir \
 	scikit-image==0.19.1 \
 	setproctitle==1.2.2 \
 	visdom==0.1.8.9 \
- && pip3 install --no-deps git+https://github.com/spezold/mvloader.git
+ && pip3 install --no-deps git+https://github.com/spezold/mvloader.git \
  && pip3 install --no-cache-dir --no-deps --force-reinstall -v \
 	future==0.18.2 \
 	SimpleITK==2.0.1
@@ -25,13 +25,13 @@ RUN git reset --hard 791ee4f
 
 # Copy the MD-GRU model
 WORKDIR /model
-wget -O brainstem_140000.data-00000-of-00001 https://zenodo.org/records/12578294/files/brainstem_140000.data-00000-of-00001?download=1
-wget -O brainstem_140000.index https://zenodo.org/records/12578294/files/brainstem_140000.index?download=1 
-wget -O brainstem_140000.meta https://zenodo.org/records/12578294/files/brainstem_140000.meta?download=1
+RUN wget -O brainstem_140000.data-00000-of-00001 https://zenodo.org/records/12578294/files/brainstem_140000.data-00000-of-00001?download=1 \
+ && wget -O brainstem_140000.index https://zenodo.org/records/12578294/files/brainstem_140000.index?download=1 \
+ && wget -O brainstem_140000.meta https://zenodo.org/records/12578294/files/brainstem_140000.meta?download=1
 
 # Copy the python pipeline scripts
 WORKDIR /opt/scripts/
-wget -O pipeline_mdgru.py GITHUBURLGOESHERE
+RUN wget -O pipeline_mdgru.py https://raw.githubusercontent.com/miac-research/dl-brainstem/main/mdgru/pipeline_mdgru.py
 
 # Command to be run at Docker start
 ENTRYPOINT [ "python", "/opt/scripts/pipeline_mdgru.py" ]
