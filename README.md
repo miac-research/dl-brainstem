@@ -40,7 +40,7 @@ apptainer run -B $(pwd) --nv brainstem-nnunet.sif T1.nii.gz
 
 ```
 # 1. Pull the image into your local registry
-docker pull ghcr.io/miac-research/brainstem-mdgrut:{version}
+docker pull ghcr.io/miac-research/brainstem-mdgru:{version}
 
 # 2. Run inference on a T1w image using GPU (flag --gpus all)
 docker run --rm --gpus all -v $(pwd):/data  brainstem-mdgru:{version} /data/T1.nii.gz
@@ -60,7 +60,7 @@ apptainer run -B $(pwd) --nv brainstem-mdgru.sif T1.nii.gz
 
 If you do not want to use the pre-built images, you can build them yourself locally using the provided Dockerfiles in the `mdgru` and `nnunet` folders.
 
-1. Download the Dockerfile and place it into a local folder
-2. Run `docker build -t brainstem-{mdgru/nnunet} .`
+1. Download the mdgru or nnunet Dockerfile and place it into a local folder
+2. In this folder, run `docker build -t brainstem-{mdgru/nnunet} .`
 
 > During build, scripts are download from this Github repository and model files are downloaded from Zenodo.
