@@ -100,7 +100,7 @@ def mdgru_prediction(t1, verbose=True):
         "python3 /opt/mdgru/RUN_mdgru.py"
         f" -f {basename(t1)} --optionname mdgru"
         f" --datapath {dir_input}"  
-        f" --locationtesting {dir_input} --locationtraining .  --locationvalidation . "
+        f" --locationtesting . --locationtraining .  --locationvalidation . "
         f" --ckpt {modelCkpt} "
         f" --num_threads 4 -w 100 100 100 -p 20 20 20"
         f" --dont_correct_orientation  --nclasses 4 --only_test"
