@@ -16,11 +16,16 @@ Ready-to-use, pre-built images for MD-GRU and nnU-Net are available for download
 
 > **IMPORTANT**: When pulling an image from the registry, instead of the latest version, you can also pull a specific version by substituting `latest` with the version number, e.g. `1.0.0`.
 
+### Hardware requirements
+
+While the inference can be run on CPU (>8 cores recommended), an NVIDIA GPU will greatly shorten the calculation time. The pre-built images currently use CUDA 12 and can thus support a wide range of NVIDIA GPUs from compute capability 5.0 (Maxwell generation, 2014) to 9.0 (current generation). A minimum of 8 GB GPU memory is required.
+
 ### nnU-Net algorithm using Docker
 
 ```
 # 1. Pull the image into your local registry
 docker pull ghcr.io/miac-research/brainstem-nnunet:latest
+docker tag ghcr.io/miac-research/brainstem-nnunet:latest brainstem-nnunet:latest
 
 # 2. Run inference on a T1w image using GPU (flag --gpus all)
 docker run --rm --gpus all -v $(pwd):/data  brainstem-nnunet:latest /data/T1.nii.gz
@@ -47,6 +52,7 @@ apptainer run -B $(pwd) --nv brainstem-nnunet.sif -h
 ```
 # 1. Pull the image into your local registry
 docker pull ghcr.io/miac-research/brainstem-mdgru:latest
+docker tag ghcr.io/miac-research/brainstem-mdgru:latest brainstem-mdgru:latest
 
 # 2. Run inference on a T1w image using GPU (flag --gpus all)
 docker run --rm --gpus all -v $(pwd):/data  brainstem-mdgru:latest /data/T1.nii.gz
