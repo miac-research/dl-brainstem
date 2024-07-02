@@ -132,7 +132,7 @@ def mdgru_prediction(t1, verbose=True):
 def pipeline_mdgru(t1, brainstem_mask, verbose=True):
     
     start_script = time.time()
-    if verbose: print(f"Segmenting MS lesions from:\n"
+    if verbose: print(f"Segmenting brainstem from:\n"
         f"  {t1}")
     if verbose: print(f"Output label map will be written to:\n"
         f"  {brainstem_mask}\n")
@@ -148,7 +148,7 @@ def pipeline_mdgru(t1, brainstem_mask, verbose=True):
         print('Warning: temporary folder exists already and will be removed')
         rmtree(dirTemp)
 
-    # Copy images to a temporary folder
+    # Copy T1 image to a temporary folder
     Path(dirTemp).mkdir(parents=True)
     t1_in = t1
     t1 = join(dirTemp,basename(t1))
@@ -191,8 +191,7 @@ def pipeline_mdgru(t1, brainstem_mask, verbose=True):
     else:
         reslice_flag = False
     
-    # Predict WM lesions using MD-GRU
-    if verbose: print('\nPredicting WM lesions using MD-GRU:')
+    # Predict brainstem using MD-GRU
     start = time.time()
     probdist, labelmap = mdgru_prediction(t1, verbose)
     end = time.time()
@@ -272,7 +271,7 @@ def iniParser():
     group0.add_argument("fnT1", type=isNIfTI, help="path to input T1w image NIfTI file (required)")
     group0.add_argument("-s", dest="suffix", type=isSuffix, default='_brainstem', help="suffix appended to input file path (before extension), in order to create path to wich to write brainstem mask (defaults to '_brainstem')")
     group0.add_argument("-o", dest="fnOut", type=str, help="path to which to write brainstem mask as NIfTI file (optional, overrides option '-s')")
-    group0.add_argument("-d", dest="dirOut", type=str, help="path to output folder, to which to write brainstem mask (optional, if missing the parent folder of the path provided with option '-o' or '-i' is used)")
+    group0.add_argument("-d", dest="dirOut", type=str, help="path to output folder, to which to write brainstem mask (optional, if missing the parent folder of the path provided with option '-o' or of the input T1 is used)")
     group0.add_argument("-x", dest="overwrite", action='store_true', help="allow overwriting output file if existing. By default, already existing output will raise an error.")
     group0.add_argument("-q", dest="quiet", action='store_true', help="suppress 'stdout' output to command line")
     return parser
@@ -288,7 +287,7 @@ if __name__ == "__main__":
 
     # check essential input
     if not args.fnT1:
-        raise ValueError('Please provide T1w image as input, using option "-i"')
+        raise ValueError('Please provide T1w image as input')
     
     # build output filename
     if args.fnOut:
