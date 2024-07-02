@@ -84,7 +84,7 @@ def nnunet_prediction(t1, verbose=True):
 def pipeline_nnunet(t1, brainstem_mask, verbose=True):
     
     start_script = time.time()
-    if verbose: print(f"Segmenting MS lesions from:\n"
+    if verbose: print(f"Segmenting brainstem from:\n"
         f"  {t1}")
     if verbose: print(f"Output label map will be written to:\n"
         f"  {brainstem_mask}\n")
@@ -133,7 +133,6 @@ def pipeline_nnunet(t1, brainstem_mask, verbose=True):
     if verbose: print(f'Resolution is {zooms}')
     
     # Predict WM lesions using nnU-Net
-    if verbose: print('\nPredicting WM lesions using nnU-Net:')
     start = time.time()
     labelmap = nnunet_prediction(t1, verbose)
     end = time.time()
@@ -196,7 +195,7 @@ if __name__ == "__main__":
 
     # check essential input
     if not args.fnT1:
-        raise ValueError('Please provide T1w image as input, using option "-i"')
+        raise ValueError('Please provide T1w image as input')
     
     # build output filename
     if args.fnOut:
