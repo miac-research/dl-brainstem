@@ -15,6 +15,8 @@ import SimpleITK as sitk
 import nibabel as nib
 from shutil import copy2, rmtree
 from pathlib import Path
+import string
+import random
 
 def qfrom_2_sform(fname_image):
 
@@ -138,7 +140,10 @@ def pipeline_mdgru(t1, brainstem_mask, verbose=True):
     if os.path.exists(brainstem_mask) and verbose:
         print('Output label map exists already and will be overwritten')
 
-    dirTemp = re.sub('\.nii(\.gz)?$', '_temp', brainstem_mask)
+    strRand = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+    dirTemp = re.sub('\.nii(\.gz)?$', '_temp-'+strRand, brainstem_mask)
+    if verbose: print(f"Creating temporary folder for processing:\n"
+                      f"  {dirTemp}")
     if os.path.exists(dirTemp):
         print('Warning: temporary folder exists already and will be removed')
         rmtree(dirTemp)
