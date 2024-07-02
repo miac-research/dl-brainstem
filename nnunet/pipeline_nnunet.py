@@ -132,7 +132,7 @@ def pipeline_nnunet(t1, brainstem_mask, verbose=True):
     zooms = np.array(nii.header.get_zooms()[0:3])
     if verbose: print(f'Resolution is {zooms}')
     
-    # Predict WM lesions using nnU-Net
+    # Predict brainstem using nnU-Net
     start = time.time()
     labelmap = nnunet_prediction(t1, verbose)
     end = time.time()
@@ -179,7 +179,7 @@ def iniParser():
     group0.add_argument("fnT1", type=isNIfTI, help="path to input T1w image NIfTI file (required)")
     group0.add_argument("-s", dest="suffix", type=isSuffix, default='_brainstem', help="suffix appended to input file path (before extension), in order to create path to wich to write brainstem mask (defaults to '_brainstem')")
     group0.add_argument("-o", dest="fnOut", type=str, help="path to which to write brainstem mask as NIfTI file (optional, overrides option '-s')")
-    group0.add_argument("-d", dest="dirOut", type=str, help="path to output folder, to which to write brainstem mask (optional, if missing the parent folder of the path provided with option '-o' or '-i' is used)")
+    group0.add_argument("-d", dest="dirOut", type=str, help="path to output folder, to which to write brainstem mask (optional, if missing the parent folder of the path provided either with option '-o' or the input T1w is used)")
     group0.add_argument("-x", dest="overwrite", action='store_true', help="allow overwriting output file if existing. By default, already existing output will raise an error.")
     group0.add_argument("-q", dest="quiet", action='store_true', help="suppress 'stdout' output to command line")
     return parser
