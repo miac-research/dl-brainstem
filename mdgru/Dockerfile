@@ -1,9 +1,12 @@
 FROM nvcr.io/nvidia/tensorflow:23.03-tf1-py3
+RUN adduser --system --no-create-home nonroot
 
-LABEL org.opencontainers.image.source https://github.com/miac-research/dl-brainstem
-LABEL version="1.0.0"
+LABEL org.opencontainers.image.source="https://github.com/miac-research/dl-brainstem"
+LABEL version="1.0.1"
+LABEL maintainer="MIAC"
 
-ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    DEBIAN_FRONTEND=noninteractive
 
 # Install Python dependencies
 RUN pip3 install --no-cache-dir \
@@ -35,4 +38,5 @@ WORKDIR /opt/scripts/
 RUN wget -nv -O pipeline_mdgru.py https://raw.githubusercontent.com/miac-research/dl-brainstem/main/mdgru/pipeline_mdgru.py
 
 # Entrypoint
+USER nonroot
 ENTRYPOINT [ "python", "/opt/scripts/pipeline_mdgru.py" ]

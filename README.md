@@ -14,9 +14,9 @@ Please make sure to cite this publication when using the methods, and please not
 
 ## Using the pre-built container images
 
-Ready-to-use, pre-built images for nnU-Net and MD-GRU brainstem segmentaion are available for download from the [Github container registry](https://github.com/miac-research/dl-brainstem/packages). These images have been tested with Docker and Apptainer/Singularity.  
+Ready-to-use, pre-built images for nnU-Net and MD-GRU brainstem segmentaion are available for download from the [Github container registry](https://github.com/miac-research/dl-brainstem/packages). The images have been tested with Docker and Apptainer/Singularity.  
 
-In general, we recommend the nnU-Net algorithm (please see our publication for a detailed comparison between the two algorithms).
+In general, we recommend the nnU-Net algorithm (please see our publication for a detailed comparison between the two algorithms) and using Apptainer (the standard container tool for scientific computing).
 
 ### Hardware requirements
 
@@ -84,4 +84,4 @@ If you do not want to use the pre-built images, you can build them yourself loca
 2. In this folder, run `docker build -t brainstem-{mdgru/nnunet} .`
 
 > [!NOTE]
-> During building, base images are downloaded from the NVIDIA NGC registry, scripts are download from this Github repository, and larger model files are downloaded from Zenodo.
+> During building, multiple external sources need to be used, e.g., base images are downloaded from the NVIDIA NGC registry, scripts are download from this Github repository, and larger model files are downloaded from Zenodo. Make sure you can access all required external sources in your build environment.
