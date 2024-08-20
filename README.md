@@ -9,12 +9,12 @@ The methods are described in detail in the following publication:
 Please make sure to cite this publication when using the methods, and please note that the license does not cover any commercial use (defined as use for which any financial return is received).
 
 > [!CAUTION]
-> These methods are **NOT a medical device** and **for non-commercial, academic research use only!**  
+> These methods are **NOT medical devices** and **for non-commercial, academic research use only!**  
 > Do NOT use these methods for diagnosis, prognosis, monitoring or any other purposes in clinical use.
 
 ## Using the pre-built container images
 
-Ready-to-use, pre-built images for nnU-Net and MD-GRU brainstem segmentaion are available for download from the [Github container registry](https://github.com/miac-research/dl-brainstem/packages). The images have been tested with Docker and Apptainer/Singularity.  
+Ready-to-use, pre-built images for nnU-Net and MD-GRU brainstem segmentaion are available for download from the [Github container registry](https://github.com/miac-research/dl-brainstem/packages). The images have been tested with Apptainer and Docker.  
 
 In general, we recommend the nnU-Net algorithm (please see our publication for a detailed comparison between the two algorithms) and using Apptainer (the standard container tool for scientific computing).
 

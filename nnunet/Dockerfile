@@ -45,7 +45,7 @@ RUN pip install --no-cache-dir --upgrade pip==23.3.2 \
 
 # Download nnU-Net model
 WORKDIR /nnunet/results/nnUNet/3d_fullres/Task600_Brainstem/
-RUN wget -nv -O nnUNet_brainstem.tar.gz https://zenodo.org/records/12578678/files/nnUNet_brainstem.tar.gz?download=1 \
+RUN wget -nv -O nnUNet_brainstem.tar.gz https://zenodo.org/records/13323293/files/nnUNet_brainstem.tar.gz?download=1 \
  && tar xvf nnUNet_brainstem.tar.gz -C ./ \
  && rm nnUNet_brainstem.tar.gz
 
